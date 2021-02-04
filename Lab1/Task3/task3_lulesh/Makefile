@@ -21,7 +21,7 @@ SOURCES2.0 = \
 OBJECTS2.0 = $(SOURCES2.0:.cc=.o)
 
 #Default build suggestions with OpenMP for g++
-CXXFLAGS = -g -O3 -fopenmp -I. -pg -Wall
+CXXFLAGS = -g -O3 -fopenmp -I. -Wall -pg
 LDFLAGS = -g -O3 -fopenmp
 
 #Below are reasonable default flags for a serial build
@@ -44,13 +44,13 @@ LDFLAGS = -g -O3 -fopenmp
 
 .cc.o: lulesh.h
 	@echo "Building $<"
-	$(CXX) -c $(CXXFLAGS) -o  $@  $<
+	$(CXX) -c $(CXXFLAGS) -o $@  $<
 
 all: $(LULESH_EXEC)
 
 lulesh2.0: $(OBJECTS2.0)
 	@echo "Linking"
-	$(CXX) $(OBJECTS2.0) $(LDFLAGS) -lm -o $@
+	$(CXX) $(OBJECTS2.0) $(LDFLAGS) -lm -pg -o $@
 
 clean:
 	/bin/rm -f *.o *~ $(OBJECTS) $(LULESH_EXEC)

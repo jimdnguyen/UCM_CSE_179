@@ -2,20 +2,20 @@ Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
- 59.05    598.24   598.24                             frame_dummy
- 31.49    917.31   319.08                             EvalEOSForElems(Domain&, double*, int, int*, int)
-  9.46   1013.19    95.88   343000     0.28     0.28  CalcElemVolume(double const*, double const*, double const*)
-  0.00   1013.20     0.01        1    10.00    10.00  Domain::CreateRegionIndexSets(int, int)
-  0.00   1013.21     0.01        1    10.00    10.00  Domain::SetupThreadSupportStructures()
-  0.00   1013.22     0.01                             Domain::Domain(int, int, int, int, int, int, int, int, int)
-  0.00   1013.22     0.00       25     0.00     0.00  std::vector<double, std::allocator<double> >::_M_default_append(unsigned long)
-  0.00   1013.22     0.00       11     0.00     0.00  std::vector<int, std::allocator<int> >::_M_default_append(unsigned long)
-  0.00   1013.22     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z14CalcElemVolumePKdS0_S0_
-  0.00   1013.22     0.00        1     0.00     0.00  Domain::SetupCommBuffers(int)
-  0.00   1013.22     0.00        1     0.00     0.00  Domain::SetupBoundaryConditions(int)
-  0.00   1013.22     0.00        1     0.00     0.00  Domain::SetupElementConnectivities(int)
-  0.00   1013.22     0.00        1     0.00     0.00  Domain::BuildMesh(int, int, int)
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 59.01    145.38   145.38                             frame_dummy
+ 31.69    223.45    78.07                             EvalEOSForElems(Domain&, double*, int, int*, int)
+  9.30    246.36    22.90   125000   183.24   183.24  CalcElemVolume(double const*, double const*, double const*)
+  0.00    246.37     0.01                             Domain::Domain(int, int, int, int, int, int, int, int, int)
+  0.00    246.37     0.00       25     0.00     0.00  std::vector<double, std::allocator<double> >::_M_default_append(unsigned long)
+  0.00    246.37     0.00       11     0.00     0.00  std::vector<int, std::allocator<int> >::_M_default_append(unsigned long)
+  0.00    246.37     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z14CalcElemVolumePKdS0_S0_
+  0.00    246.37     0.00        1     0.00     0.00  Domain::SetupCommBuffers(int)
+  0.00    246.37     0.00        1     0.00     0.00  Domain::CreateRegionIndexSets(int, int)
+  0.00    246.37     0.00        1     0.00     0.00  Domain::SetupBoundaryConditions(int)
+  0.00    246.37     0.00        1     0.00     0.00  Domain::SetupElementConnectivities(int)
+  0.00    246.37     0.00        1     0.00     0.00  Domain::SetupThreadSupportStructures()
+  0.00    246.37     0.00        1     0.00     0.00  Domain::BuildMesh(int, int, int)
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -53,57 +53,57 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.00% of 1013.22 seconds
+granularity: each sample hit covers 2 byte(s) for 0.00% of 246.37 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     59.0  598.24    0.00                 frame_dummy [1]
+[1]     59.0  145.38    0.00                 frame_dummy [1]
 -----------------------------------------------
                                                  <spontaneous>
-[2]     31.5  319.08    0.00                 EvalEOSForElems(Domain&, double*, int, int*, int) [2]
+[2]     31.7   78.07    0.00                 EvalEOSForElems(Domain&, double*, int, int*, int) [2]
 -----------------------------------------------
                                                  <spontaneous>
-[3]      9.5    0.01   95.90                 Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-               95.88    0.00  343000/343000      CalcElemVolume(double const*, double const*, double const*) [4]
-                0.01    0.00       1/1           Domain::SetupThreadSupportStructures() [6]
-                0.01    0.00       1/1           Domain::CreateRegionIndexSets(int, int) [5]
-                0.00    0.00      25/25          std::vector<double, std::allocator<double> >::_M_default_append(unsigned long) [13]
-                0.00    0.00       9/11          std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) [14]
-                0.00    0.00       1/1           Domain::SetupCommBuffers(int) [16]
+[3]      9.3    0.01   22.90                 Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
+               22.90    0.00  125000/125000      CalcElemVolume(double const*, double const*, double const*) [4]
+                0.00    0.00      25/25          std::vector<double, std::allocator<double> >::_M_default_append(unsigned long) [11]
+                0.00    0.00       9/11          std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) [12]
+                0.00    0.00       1/1           Domain::SetupCommBuffers(int) [14]
+                0.00    0.00       1/1           Domain::SetupThreadSupportStructures() [18]
                 0.00    0.00       1/1           Domain::BuildMesh(int, int, int) [19]
-                0.00    0.00       1/1           Domain::SetupElementConnectivities(int) [18]
-                0.00    0.00       1/1           Domain::SetupBoundaryConditions(int) [17]
+                0.00    0.00       1/1           Domain::CreateRegionIndexSets(int, int) [15]
+                0.00    0.00       1/1           Domain::SetupElementConnectivities(int) [17]
+                0.00    0.00       1/1           Domain::SetupBoundaryConditions(int) [16]
 -----------------------------------------------
-                             353657260             CalcElemVolume(double const*, double const*, double const*) [4]
-               95.88    0.00  343000/343000      Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[4]      9.5   95.88    0.00  343000+353657260 CalcElemVolume(double const*, double const*, double const*) [4]
-                             353657260             CalcElemVolume(double const*, double const*, double const*) [4]
------------------------------------------------
-                0.01    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[5]      0.0    0.01    0.00       1         Domain::CreateRegionIndexSets(int, int) [5]
------------------------------------------------
-                0.01    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[6]      0.0    0.01    0.00       1         Domain::SetupThreadSupportStructures() [6]
+                             91006039             CalcElemVolume(double const*, double const*, double const*) [4]
+               22.90    0.00  125000/125000      Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
+[4]      9.3   22.90    0.00  125000+91006039 CalcElemVolume(double const*, double const*, double const*) [4]
+                             91006039             CalcElemVolume(double const*, double const*, double const*) [4]
 -----------------------------------------------
                 0.00    0.00      25/25          Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[13]     0.0    0.00    0.00      25         std::vector<double, std::allocator<double> >::_M_default_append(unsigned long) [13]
+[11]     0.0    0.00    0.00      25         std::vector<double, std::allocator<double> >::_M_default_append(unsigned long) [11]
 -----------------------------------------------
-                0.00    0.00       2/11          Domain::SetupCommBuffers(int) [16]
+                0.00    0.00       2/11          Domain::SetupCommBuffers(int) [14]
                 0.00    0.00       9/11          Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[14]     0.0    0.00    0.00      11         std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) [14]
+[12]     0.0    0.00    0.00      11         std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) [12]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [30]
-[15]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z14CalcElemVolumePKdS0_S0_ [15]
+[13]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z14CalcElemVolumePKdS0_S0_ [13]
 -----------------------------------------------
                 0.00    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[16]     0.0    0.00    0.00       1         Domain::SetupCommBuffers(int) [16]
-                0.00    0.00       2/11          std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) [14]
+[14]     0.0    0.00    0.00       1         Domain::SetupCommBuffers(int) [14]
+                0.00    0.00       2/11          std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) [12]
 -----------------------------------------------
                 0.00    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[17]     0.0    0.00    0.00       1         Domain::SetupBoundaryConditions(int) [17]
+[15]     0.0    0.00    0.00       1         Domain::CreateRegionIndexSets(int, int) [15]
 -----------------------------------------------
                 0.00    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
-[18]     0.0    0.00    0.00       1         Domain::SetupElementConnectivities(int) [18]
+[16]     0.0    0.00    0.00       1         Domain::SetupBoundaryConditions(int) [16]
+-----------------------------------------------
+                0.00    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
+[17]     0.0    0.00    0.00       1         Domain::SetupElementConnectivities(int) [17]
+-----------------------------------------------
+                0.00    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
+[18]     0.0    0.00    0.00       1         Domain::SetupThreadSupportStructures() [18]
 -----------------------------------------------
                 0.00    0.00       1/1           Domain::Domain(int, int, int, int, int, int, int, int, int) [3]
 [19]     0.0    0.00    0.00       1         Domain::BuildMesh(int, int, int) [19]
@@ -199,8 +199,8 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [15] _GLOBAL__sub_I__Z14CalcElemVolumePKdS0_S0_ (lulesh.cc) [17] Domain::SetupBoundaryConditions(int) [13] std::vector<double, std::allocator<double> >::_M_default_append(unsigned long)
-   [4] CalcElemVolume(double const*, double const*, double const*) [18] Domain::SetupElementConnectivities(int) [14] std::vector<int, std::allocator<int> >::_M_default_append(unsigned long)
-   [2] EvalEOSForElems(Domain&, double*, int, int*, int) (lulesh.cc) [6] Domain::SetupThreadSupportStructures() [1] frame_dummy
-  [16] Domain::SetupCommBuffers(int) [19] Domain::BuildMesh(int, int, int)
-   [5] Domain::CreateRegionIndexSets(int, int) [3] Domain::Domain(int, int, int, int, int, int, int, int, int)
+  [13] _GLOBAL__sub_I__Z14CalcElemVolumePKdS0_S0_ (lulesh.cc) [16] Domain::SetupBoundaryConditions(int) [11] std::vector<double, std::allocator<double> >::_M_default_append(unsigned long)
+   [4] CalcElemVolume(double const*, double const*, double const*) [17] Domain::SetupElementConnectivities(int) [12] std::vector<int, std::allocator<int> >::_M_default_append(unsigned long)
+   [2] EvalEOSForElems(Domain&, double*, int, int*, int) (lulesh.cc) [18] Domain::SetupThreadSupportStructures() [1] frame_dummy
+  [14] Domain::SetupCommBuffers(int) [19] Domain::BuildMesh(int, int, int)
+  [15] Domain::CreateRegionIndexSets(int, int) [3] Domain::Domain(int, int, int, int, int, int, int, int, int)
