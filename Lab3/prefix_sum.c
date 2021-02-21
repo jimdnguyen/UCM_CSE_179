@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <iostream>
 
 const int N = 4096;
 const int threads = 4;
@@ -57,7 +56,7 @@ int main(){
     }
     */
 
-    //std::cout<<std::endl<<y[N-1]<<std::endl<< N*(N+1)/2<<std::endl;
+    //printf(" Number after doing prefix sum: %d, Number after doing n(n+1)/2: %d \n ",y[N-1], N*(N+1)/2);
 
     
 

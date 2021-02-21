@@ -3,7 +3,7 @@
 #include <omp.h>
 
 #ifndef N
-#define N 5
+#define N 10
 #endif
 #ifndef FS
 #define FS 38
@@ -20,11 +20,11 @@ int fib(int n) {
    if (n < 2) {
       return (n);
    } else {
-      #pragma omp task shared(x)
+      //#pragma omp task shared(x)
          x = fib(n - 1);
-      #pragma omp task shared(y)
+      //#pragma omp task shared(y)
          y = fib(n - 2);
-      #pragma omp taskwait
+      //#pragma omp taskwait
 	      return (x + y);
    }
 }
@@ -59,11 +59,13 @@ struct node* init_list(struct node* p) {
 }
 
 int main(int argc, char *argv[]) {
-   omp_set_num_threads(16);
+   omp_set_num_threads(4);
      double start, end;
      struct node *p=NULL;
      struct node *temp=NULL;
      struct node *head=NULL;
+     struct node *parr[100];
+     int i, counter = 0;
      
      printf("Process linked list\n");
      printf("  Each linked list node will be processed by function 'processwork()'\n");
@@ -81,27 +83,42 @@ int main(int argc, char *argv[]) {
      }
      */
 
+    /*
+      while (p != NULL) {
+		   p = p->next;
+         counter++;
+        }
+
+        p = head;
+      
+      for(i = 0; i < counter; i++){
+         parr[i] = p;
+         p = p->next;
+      }
+
+      #pragma omp parallel for
+         for(i = 0; i < counter; i++){
+            processwork(parr[i]);
+         }
+
+     */
+
      start = omp_get_wtime();
     
-   
-    #pragma omp parallel
-    {
-       #pragma omp single 
-       {
-          struct node *p2 = head;
-         while(p2){
-            #pragma omp task firstprivate(p2)
-            {
-               processwork(p2);
+      #pragma omp parallel
+      {
+         #pragma omp single
+         {
+            p = head;
+            while(p){
+               #pragma omp task firstprivate(p)
+               {
+                  processwork(p);
+               }
+               p = p->next;
             }
-            p2 = p2->next;
          }
-         
-       }
-
-    }
-
-     
+      }
 
      end = omp_get_wtime();
      p = head;
