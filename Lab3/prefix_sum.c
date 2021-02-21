@@ -8,7 +8,7 @@ const int threads = 4;
 
 int main(){
     omp_set_num_threads(threads);
-    double runtime;
+    double runtime,runtime2,runtime3,runtime4,runtime5;
     int x[N];
     int y[N];
     int t[threads + 1];
@@ -38,17 +38,20 @@ int main(){
         y[i] = tmpSum;
         t[omp_get_thread_num() + 1] = tmpSum;
     }
+    runtime2 = omp_get_wtime() - runtime;
 
     for(int i = 1; i <threads;i++){
         t[i] += t[i-1];
     }
+    runtime3 = omp_get_wtime() - runtime;
 
     #pragma omp parallel for schedule(static)
     for(int i = 0; i < N;i++){
         y[i] += t[omp_get_thread_num()];
     }
+    runtime4 = omp_get_wtime() - runtime;
 
-    runtime = omp_get_wtime() - runtime;
+    
 
     /*
     for(int i = 0; i < N; i++){
@@ -56,10 +59,11 @@ int main(){
     }
     */
 
-    //printf(" Number after doing prefix sum: %d, Number after doing n(n+1)/2: %d \n ",y[N-1], N*(N+1)/2);
+    printf("Number after doing prefix sum: %d\n",y[N-1]);
+    runtime5 = omp_get_wtime() - runtime;
 
     
 
-    printf(" This code ran in %lf seconds \n",runtime);
+    printf("Spliting the array among the threads and each thread computes own (partial) prefix sum took %lf seconds,\nCreating an array t to perform the simple prefix sum took in %lf seconds,\nAll the threads adding T[threadid] to elements took %lf seconds,\nTotal runtime/Displaying the prefix sum took %lf seconds \n",runtime2,runtime3,runtime4,runtime5);
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <omp.h>
 
 #ifndef N
-#define N 10
+#define N 5
 #endif
 #ifndef FS
 #define FS 38
@@ -74,7 +74,9 @@ int main(int argc, char *argv[]) {
      p = init_list(p);
      head = p;
 
-      /*
+     start = omp_get_wtime();
+
+      /*                           This is the serial code
      {
         while (p != NULL) {
 		   processwork(p);
@@ -82,8 +84,8 @@ int main(int argc, char *argv[]) {
         }
      }
      */
-
-    /*
+ 
+    ///*                             Parallelize the program using loop worksharing contructs
       while (p != NULL) {
 		   p = p->next;
          counter++;
@@ -101,11 +103,9 @@ int main(int argc, char *argv[]) {
             processwork(parr[i]);
          }
 
-     */
-
-     start = omp_get_wtime();
-    
-      #pragma omp parallel
+     //*/
+    /*
+      #pragma omp parallel      //Parallelize program using OpenMP Tasks
       {
          #pragma omp single
          {
@@ -119,6 +119,7 @@ int main(int argc, char *argv[]) {
             }
          }
       }
+      */
 
      end = omp_get_wtime();
      p = head;
@@ -130,7 +131,7 @@ int main(int argc, char *argv[]) {
      }  
 	 free (p);
 
-     printf("Compute Time: %f seconds\n", end - start);
+     printf("Compute Time using loop worksharing constructs: %f seconds\n", end - start);
 
      return 0;
 }

@@ -13,7 +13,7 @@
 
 
 #define N        10000
-#define threads 32
+#define threads 4
 
 /* Some random number constants from numerical recipies */
 #define SEED       2531
@@ -27,7 +27,6 @@ int randy = SEED;
 void fill_rand(int length, double *a)
 {
    int i; 
-    //#pragma omp parallel for num_threads(threads)
    for (i=0;i<length;i++) {
      randy = (RAND_MULT * randy + RAND_ADD) % RAND_MOD;
      *(a+i) = ((double) randy)/((double) RAND_MOD);
@@ -39,7 +38,6 @@ double Sum_array(int length, double *a)
 {
   double sum = 0.0;      
    int i;  
-  // #pragma omp parallel for num_threads(threads) 
    for (i=0;i<length;i++)  sum += *(a+i);  
    return sum; 
    
@@ -50,21 +48,36 @@ int main()
   double *A, sum, runtime;
   int flag = 0;
 
+  omp_set_num_threads(threads);
+
   A = (double *)malloc(N*sizeof(double));
     runtime = omp_get_wtime();
-//https://stackoverflow.com/questions/47253979/c-openmp-recursion-with-tasks-error-invalid-branch-to-from-openmp-structured-b
-  #pragma omp parallel num_threads(threads)
-  #pragma omp single
-   {
-     #pragma omp task
-     fill_rand(N, A);        // Producer: fill an array of data
-  #pragma omp task depend(out: sum)
-  sum = Sum_array(N, A);  // Consumer: sum the array
-  }
 
+    #pragma omp parallel 
+    {
+      #pragma omp sections
+      {
+        #pragma omp section
+          {
+            fill_rand(N, A);        // Producer: fill an array of data
+            #pragma omp flush       //https://materials.prace-ri.eu/454/4/MemoryModelAOEM15.pdf slides 4-9
+            flag = 1;
+            #pragma omp flush
+          }
+        #pragma omp section
+          {
+            #pragma omp flush
+            while(!flag){
+              #pragma omp flush
+            }
+            #pragma omp flush
 
- 
-   
+            sum = Sum_array(N, A);  // Consumer: sum the array
+          }
+      }
+      
+    }
+
   runtime = omp_get_wtime() - runtime;
 
   printf(" In %lf seconds, The sum is %lf \n",runtime,sum);
