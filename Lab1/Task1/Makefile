@@ -1,8 +1,15 @@
-learn_makefile: learn_makefile.o printfunc.o
-	cc -o learn_makefile learn_makefile.o printfunc.o
+src = $(wildcard src/*.c)
+objdir = $(wildcard obj)
+obj = $(src:.c=.o)
 
-learn_makefile.o: learn_makefile.c
-	cc -c learn_makefile.c
+LDFLAGS = -lpng -lz -lm
 
-printfunc.o: printfunc.c
-	cc -c printfunc.c
+
+myprog: $(obj)
+	$(CXX) -o $@ $^ $(LDFLAGS)
+	mv $(obj) $(objdir)
+	
+.PHONY: clean
+clean:
+	rm -f $(obj) myprog
+	cd $(objdir) && rm -f *.o

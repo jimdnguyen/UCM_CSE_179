@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "learn_makefile.h"
+#include "../include/learn_makefile.h"
 
 void myPrint(void) {
 

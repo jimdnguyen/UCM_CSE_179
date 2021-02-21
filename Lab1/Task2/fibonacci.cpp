@@ -15,7 +15,7 @@ int main() {
     cout << "Fibonacci Series: " << firstTerm << " + " << secondTerm;
 
     //measure the execution time of the following loop
-    for (int i = 1; i <= n-2; i++) {
+    for (int i = 1; i <= n-2; ++i) {
         nextTerm = firstTerm + secondTerm;
         cout << " + " << nextTerm;
         firstTerm = secondTerm;
@@ -30,9 +30,9 @@ int main() {
     long diff_usec = end_time_usec - start_time_usec;
 
     
-    printf("-------------------------------------\n");
-    printf("Execution time (second): %ld\n", diff_sec);
-    printf("Execution time (microsecond): %ld\n", diff_usec);
-    printf("-------------------------------------\n");
+    printf("---------------------------------------\n");
+    printf("Execution time in seconds: %ld\n", diff_sec);
+    printf("Execution time in microseconds: %ld\n", diff_usec);
+    printf("---------------------------------------\n");
     return 0;
 }

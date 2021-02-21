@@ -1,4 +1,4 @@
-#include "learn_makefile.h"
+#include "../include/learn_makefile.h"
 
 int main() {
   // call a function in another file

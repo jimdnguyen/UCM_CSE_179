@@ -50,7 +50,7 @@ all: $(LULESH_EXEC)
 
 lulesh2.0: $(OBJECTS2.0)
 	@echo "Linking"
-	$(CXX) $(OBJECTS2.0) $(LDFLAGS) -lm -pg -o  $@
+	$(CXX) $(OBJECTS2.0) $(LDFLAGS) -lm -pg -o $@
 
 clean:
 	/bin/rm -f *.o *~ $(OBJECTS) $(LULESH_EXEC)
