@@ -1,10 +1,11 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/time.h>
 
 void *compute_pi(void *);
 
-#define NUM_THREADS 32
+#define NUM_THREADS 4
 
 int sample_points_per_thread = 10000;
 
@@ -32,6 +33,9 @@ void *compute_pi(void *s){
 }
 
 int main(){
+    struct timeval current_time;
+    gettimeofday(&current_time,NULL);
+    long start_time_usec = current_time.tv_usec;
     int hits[NUM_THREADS];
     double pi;
     double total_hits;
@@ -50,8 +54,14 @@ int main(){
     }
 
     pi = 4.0 * (total_hits)/(NUM_THREADS * sample_points_per_thread);
+    gettimeofday(&current_time,NULL);
+    long end_time_usec = current_time.tv_usec;
+    long diff_usec = end_time_usec - start_time_usec;
 
     printf("Estimated Pi Value: %f\n",pi);
+    printf("---------------------------------------\n");
+    printf("Execution time in microseconds: %ld\n", diff_usec);
+    printf("---------------------------------------\n");
 
 
 }

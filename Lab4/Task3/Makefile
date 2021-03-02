@@ -1,11 +1,16 @@
-TARGET = bankAccount
-CC     = gcc
-CFLAGS = -Wall -ansi -pedantic -std=c99
-LFLAGS = -o $(TARGET) -lpthread
+CC_R = xlc_r
 
-$(TARGET): $(TARGET).c bankAccount.h
-	$(CC) $(CFLAGS) $(TARGET).c $(LFLAGS)
+TARGETS = test03
+
+OBJS = test03.o
+
+SRCS = $(OBJS:.o=.c)
+
+$(TARGETS): $(OBJS)
+	$(CC_R) -o $@ $@.o
 
 clean:
-	rm -f $(TARGET) *.o *~ *#
+	rm $(OBJS) $(TARGETS)
 
+run:
+	test03

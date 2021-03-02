@@ -45,8 +45,10 @@ int main(int argc, char** argv) {
   pthread_t * children;       // dynamic array of child threads
   unsigned long id = 0;              // loop control variable
   unsigned long numThreads = 2;           // desired # of threads
+  pthread_mutex_init(&balance_lock,NULL);
                                      // get desired # of threads
   numThreads = processCommandLine(argc, argv);
+ 
                                      // allocate array of handles
   children = malloc( numThreads * sizeof(pthread_t) );
                                           // FORK:
@@ -56,7 +58,7 @@ int main(int argc, char** argv) {
                       child,              // the function it should run
                       (void*) id );       // args to that function
   }
-  
+   
   do1000Transactions(0);
 
   for (id = 1; id < numThreads; id++) {   // JOIN:

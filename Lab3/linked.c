@@ -3,7 +3,7 @@
 #include <omp.h>
 
 #ifndef N
-#define N 5
+#define N 7
 #endif
 #ifndef FS
 #define FS 38
@@ -59,7 +59,7 @@ struct node* init_list(struct node* p) {
 }
 
 int main(int argc, char *argv[]) {
-   omp_set_num_threads(4);
+   omp_set_num_threads(6);
      double start, end;
      struct node *p=NULL;
      struct node *temp=NULL;
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
      }
      */
  
-    ///*                             Parallelize the program using loop worksharing contructs
+    /*                             Parallelize the program using loop worksharing contructs
       while (p != NULL) {
 		   p = p->next;
          counter++;
@@ -103,8 +103,8 @@ int main(int argc, char *argv[]) {
             processwork(parr[i]);
          }
 
-     //*/
-    /*
+     */
+    ///*
       #pragma omp parallel      //Parallelize program using OpenMP Tasks
       {
          #pragma omp single
@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
             }
          }
       }
-      */
+      //*/
 
      end = omp_get_wtime();
      p = head;
@@ -130,8 +130,10 @@ int main(int argc, char *argv[]) {
         p = temp;
      }  
 	 free (p);
+    //loop worksharing constructs:
+    //OpenMP Tasks:
 
-     printf("Compute Time using loop worksharing constructs: %f seconds\n", end - start);
+     printf("Compute Time using OpenMP Tasks: %f seconds\n", end - start);
 
      return 0;
 }
