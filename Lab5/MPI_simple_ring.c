@@ -21,8 +21,9 @@ Measure the execution time with different number of MPI processes.
 
 int main(int argc, char *argv[]) {
 
-    int numprocs, rank, namelen,nextproc,prevproc,i,token;
-    char processor_name[MPI_MAX_PROCESSOR_NAME];
+    int numprocs, rank, namelen, nextproc, prevproc, i;
+    double startTime,endTime,totalTime;
+    startTime = MPI_Wtime();
     MPI_Status status;
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
@@ -33,25 +34,27 @@ int main(int argc, char *argv[]) {
 
     
     if(rank == 0){
-        MPI_Send(&i, 1, MPI_INT,(rank + 1) % numprocs,0,MPI_COMM_WORLD);
+        MPI_Send(&i, 1, MPI_INT,nextproc,0,MPI_COMM_WORLD);
         i++;
-    }
-
-    if(rank > 0){
-        MPI_Recv(&i, numprocs, MPI_INT, (rank + numprocs - 1)% numprocs,0,MPI_COMM_WORLD,&status);
-        prevproc = (rank + numprocs - 1)% numprocs;
+    } else if(rank > 0){
+        MPI_Recv(&i, numprocs, MPI_INT, prevproc,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);        
         printf("Process %d received i value %d from Process %d\n", rank, i, prevproc);
         i++;
-        MPI_Send(&i, 1, MPI_INT,(rank + 1) % numprocs,0,MPI_COMM_WORLD);
+        MPI_Send(&i, 1, MPI_INT,nextproc,0,MPI_COMM_WORLD);
     }
 
     if(rank == 0){
-        MPI_Recv(&i, numprocs, MPI_INT, prevproc,0,MPI_COMM_WORLD,&status);
+        MPI_Recv(&i, numprocs, MPI_INT, prevproc,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         printf("Process %d received i value %d from Process %d\n", rank, i, prevproc);
     }
 
-
+    endTime = MPI_Wtime();
+    totalTime = endTime - startTime;
+    printf("The ring took us %f seconds\n",totalTime);
     MPI_Finalize();
+    
+    
+    
 
     return 0;
 }
