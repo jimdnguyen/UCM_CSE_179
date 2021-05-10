@@ -4,8 +4,10 @@
 int main(int argc, char *argv[]) {
 
     int num_proc, my_rank;
-    int arraySize = 100;
-    int isend[arraySize];    
+    int arraySize = 40;
+    int isend[arraySize];   
+    double startTime,endTime,totalTime;
+    startTime = MPI_Wtime(); 
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &num_proc);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
@@ -31,6 +33,10 @@ int main(int argc, char *argv[]) {
             printf("%d\n",isend[i]);
         }
     }
+
+    endTime = MPI_Wtime();
+    totalTime = endTime - startTime;
+    printf("This process took us %f seconds\n",totalTime);
 
     MPI_Finalize();
 
